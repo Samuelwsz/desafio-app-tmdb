@@ -1,4 +1,4 @@
-interface Movie {
+export interface Movie {
   adult: boolean
   backdrop_path: string
   id: number
@@ -16,4 +16,23 @@ interface Movie {
   video: boolean
   vote_average: number
   vote_count: number
+  runtime: number
+}
+export interface CastMember {
+  id: number
+  name: string
+  character: string
+  profile_path: string | null
+}
+
+export interface Trailer {
+  id: string
+  key: string
+  name: string
+  type: string
+}
+
+export interface Genre {
+  id: number
+  name: string
 }
