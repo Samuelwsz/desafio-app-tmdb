@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function Card({ movie }: { movie: Movie }) {
   return (
-    <Link href={`/movie/${movie.id}`} key={movie.id} className="group m-4 ">
+    <Link href={`/movie/${movie.id}`} target="_blank" key={movie.id} className="group m-4 ">
       <Image
         alt="Image"
         src={`https://image.tmdb.org/t/p/original/${
