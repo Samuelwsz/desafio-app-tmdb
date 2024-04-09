@@ -7,7 +7,12 @@ import Link from "next/link"
 
 export function Card({ movie }: { movie: Movie }) {
   return (
-    <Link href={`/movie/${movie.id}`} target="_blank" key={movie.id} className="group m-4 ">
+    <Link
+      href={`/movie/${movie.id}`}
+      target="_blank"
+      key={movie.id}
+      className="group m-4 "
+    >
       <Image
         alt="Image"
         src={`https://image.tmdb.org/t/p/original/${
@@ -27,11 +32,13 @@ export function Card({ movie }: { movie: Movie }) {
         </div>
         <div className="flex justify-between">
           <p>
-            {format(
-              new Date(movie.release_date || movie.first_air_date),
-              "dd-MM-yyyy",
-              { locale: ptBR }
-            )}
+            {movie.release_date || movie.first_air_date
+              ? format(
+                  new Date(movie.release_date || movie.first_air_date),
+                  "dd-MM-yyyy",
+                  { locale: ptBR }
+                )
+              : "Data de lançamento desconhecida"}
           </p>
           <p className="flex items-center gap-2">
             <ThumbsUp className="size-5" />

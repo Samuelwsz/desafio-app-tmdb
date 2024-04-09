@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/darkmode/theme-provider"
 import { NavBar } from "@/components/navbar/navbar"
+import { SearchBox } from "@/components/searchBox"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NavBar />
+          <SearchBox />
           {children}
         </ThemeProvider>
       </body>
