@@ -8,10 +8,13 @@ export const FetchTrending = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(1)
   const [totalResults, setTotalResults] = useState<number>(0)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchTrending = async () => {
       try {
+        setLoading(true)
+
         const res = await axios.get(
           `https://api.themoviedb.org/3/trending/all/${trendingType}?api_key=5460b4c75854b99a5e30d1a559e883a9&language=pt-BR&page=${currentPage}`
         )
@@ -20,6 +23,8 @@ export const FetchTrending = () => {
         setTotalResults(res.data.total_results)
       } catch (error) {
         console.error("Erro ao buscar os filmes do Top Trending:", error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchTrending()
@@ -61,5 +66,6 @@ export const FetchTrending = () => {
     currentPage,
     totalResults,
     totalPages,
+    loading,
   }
 }

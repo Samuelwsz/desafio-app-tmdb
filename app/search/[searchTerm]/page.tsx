@@ -1,4 +1,5 @@
 import { Movie } from "@/app/interface"
+import Loading from "@/app/loading"
 import { Card } from "@/components/card"
 import axios from "axios"
 
@@ -18,6 +19,8 @@ export default async function SearchPage({ params }: SearchTermProps) {
   const data = await res.data
   const results = data.results
 
+  
+
   return (
     <div>
       {results.length === 0 && (
@@ -26,6 +29,11 @@ export default async function SearchPage({ params }: SearchTermProps) {
         </h1>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
+        {!results && (
+          <>
+            <Loading />
+          </>
+        )}
         {results &&
           results.map((movie: Movie) => <Card key={movie.id} movie={movie} />)}
       </div>

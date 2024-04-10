@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { IconButton } from "@/components/icon-button"
 import { FetchTrending } from "@/lib/fetchTrending"
+import Loading from "./loading"
 
 export default function Home() {
   const {
@@ -25,6 +26,7 @@ export default function Home() {
     currentPage,
     totalResults,
     totalPages,
+    loading,
   } = FetchTrending()
 
   return (
@@ -51,39 +53,56 @@ export default function Home() {
           Principais tendências da Semana
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
-        {trendingData.map((movie: Movie) => (
-          <>
-            <Card key={movie.id} movie={movie} />
-          </>
-        ))}
-      </div>
-      <div className="flex my-4 justify-between mx-8">
-        Mostrando {itemsPerPage} de {totalResults} itens
-        <div className="flex items-center gap-1.5">
-          <span className="mr-6">
-            Página {currentPage} de {totalPages}
-          </span>
-          <IconButton onClick={goToFirstPage} disabled={currentPage === 1}>
-            <ChevronsLeft />
-          </IconButton>
-          <IconButton onClick={goToPreviousPage} disabled={currentPage === 1}>
-            <ChevronLeft />
-          </IconButton>
-          <IconButton
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-          >
-            <ChevronRight />
-          </IconButton>
-          <IconButton
-            onClick={goToLastPage}
-            disabled={currentPage === totalPages}
-          >
-            <ChevronsRight />
-          </IconButton>
-        </div>
-      </div>
+      {loading && (
+        <>
+          <Loading />
+        </>
+      )}
+      {!loading && (
+        <>
+          {" "}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
+            {trendingData.map((movie: Movie) => (
+              <>
+                <Card key={movie.id} movie={movie} />
+              </>
+            ))}
+          </div>
+          <div className="flex my-4 justify-between mx-8">
+            <div>
+              Mostrando <span className="text-orange-500">{itemsPerPage}</span>{" "}
+              de <span className="text-orange-500">{totalResults}</span> itens
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="mr-6">
+                Página <span className="text-orange-500">{currentPage}</span> de{" "}
+                <span className="text-orange-500">{totalPages}</span>
+              </div>
+              <IconButton onClick={goToFirstPage} disabled={currentPage === 1}>
+                <ChevronsLeft className="text-orange-500" />
+              </IconButton>
+              <IconButton
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="text-orange-500" />
+              </IconButton>
+              <IconButton
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="text-orange-500" />
+              </IconButton>
+              <IconButton
+                onClick={goToLastPage}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronsRight className="text-orange-500" />
+              </IconButton>
+            </div>
+          </div>
+        </>
+      )}
     </main>
   )
 }

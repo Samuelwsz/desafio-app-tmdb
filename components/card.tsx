@@ -13,15 +13,24 @@ export function Card({ movie }: { movie: Movie }) {
       key={movie.id}
       className="group m-4 "
     >
-      <Image
-        alt="Image"
-        src={`https://image.tmdb.org/t/p/original/${
-          movie.backdrop_path || movie.poster_path
-        }`}
-        width={500}
-        height={300}
-        className="sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300"
-      />
+      <div>
+        {movie.backdrop_path || movie.poster_path ? (
+          <Image
+            alt="Image"
+            src={`https://image.tmdb.org/t/p/original/${
+              movie.backdrop_path || movie.poster_path
+            }`}
+            width={500}
+            height={300}
+            className="sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300"
+          />
+        ) : (
+          <p className="text-center">
+            Imagem não disponível
+          </p>
+        )}
+      </div>
+
       <div className="border border-slate-800 border-t-0 p-2">
         <div className="flex justify-between">
           <h1>{movie.title || movie.name}</h1>
