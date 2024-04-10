@@ -3,15 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { Movie } from "./interface"
 import { Card } from "@/components/card"
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react"
-import { IconButton } from "@/components/icon-button"
 import { FetchTrending } from "@/lib/fetchTrending"
 import Loading from "./loading"
+import { Pagination } from "@/components/pagination"
 
 export default function Home() {
   const {
@@ -68,39 +62,16 @@ export default function Home() {
               </>
             ))}
           </div>
-          <div className="flex my-4 justify-between mx-8">
-            <div>
-              Mostrando <span className="text-orange-500">{itemsPerPage}</span>{" "}
-              de <span className="text-orange-500">{totalResults}</span> itens
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="mr-6">
-                Página <span className="text-orange-500">{currentPage}</span> de{" "}
-                <span className="text-orange-500">{totalPages}</span>
-              </div>
-              <IconButton onClick={goToFirstPage} disabled={currentPage === 1}>
-                <ChevronsLeft className="text-orange-500" />
-              </IconButton>
-              <IconButton
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="text-orange-500" />
-              </IconButton>
-              <IconButton
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-              >
-                <ChevronRight className="text-orange-500" />
-              </IconButton>
-              <IconButton
-                onClick={goToLastPage}
-                disabled={currentPage === totalPages}
-              >
-                <ChevronsRight className="text-orange-500" />
-              </IconButton>
-            </div>
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            goToFirstPage={goToFirstPage}
+            goToLastPage={goToLastPage}
+            goToNextPage={goToNextPage}
+            goToPreviousPage={goToPreviousPage}
+            itemsPerPage={itemsPerPage}
+            totalPages={totalPages}
+            totalResults={totalResults}
+          />
         </>
       )}
     </main>

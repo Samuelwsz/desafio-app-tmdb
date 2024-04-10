@@ -7,12 +7,7 @@ import Link from "next/link"
 
 export function Card({ movie }: { movie: Movie }) {
   return (
-    <Link
-      href={`/movie/${movie.id}`}
-      target="_blank"
-      key={movie.id}
-      className="group m-4 "
-    >
+    <Link href={`/movie/${movie.id}`} key={movie.id} className="group m-4 ">
       <div>
         {movie.backdrop_path || movie.poster_path ? (
           <Image
@@ -25,9 +20,7 @@ export function Card({ movie }: { movie: Movie }) {
             className="sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300"
           />
         ) : (
-          <p className="text-center">
-            Imagem não disponível
-          </p>
+          <p className="text-center">Imagem não disponível</p>
         )}
       </div>
 
