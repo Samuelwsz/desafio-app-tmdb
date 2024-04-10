@@ -2,7 +2,7 @@ import { Movie } from "@/app/interface"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-export const FetchTrending = () => {
+export const useFetchTrending = () => {
   const [trendingType, setTrendingType] = useState("day")
   const [trendingData, setTrendingData] = useState<Movie[]>([])
   const [currentPage, setCurrentPage] = useState<number>(1)

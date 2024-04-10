@@ -1,9 +1,10 @@
 "use client"
 
-import { CastMember, Genre, Movie, Trailer } from "@/app/interface"
+import { CastMember, Genre, Trailer } from "@/app/interface"
 import Loading from "@/app/loading"
+import { useLikeOrDislikeMovie } from "@/lib/useLikeOrDislikeMovie"
 import axios from "axios"
-import { format, formatDuration } from "date-fns"
+import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { Sparkles, Star, ThumbsDown, ThumbsUp } from "lucide-react"
 import Image from "next/image"
@@ -18,10 +19,19 @@ interface MovieIdProps {
 export default function MovieId({ params }: MovieIdProps) {
   const movieId = params.id
 
-  const [movie, setMovie] = useState<Movie | null>(null)
   const [cast, setCast] = useState<CastMember[]>([])
   const [trailer, setTrailer] = useState<Trailer | null>(null)
   const [genres, setGenres] = useState<Genre[]>([])
+
+  const {
+    movie,
+    setMovie,
+    formatMovieDuration,
+    toggleLikeMovie,
+    likedMovies,
+    dislikedMovies,
+    toggleDislikeMovie,
+  } = useLikeOrDislikeMovie()
 
   useEffect(() => {
     const fetchMovieId = async () => {
@@ -57,23 +67,13 @@ export default function MovieId({ params }: MovieIdProps) {
     }
 
     fetchMovieId()
-  }, [movieId])
+  }, [movieId, setCast, setGenres, setMovie, setTrailer])
 
   if (!movie) {
     return (
       <div>
         <Loading />
       </div>
-    )
-  }
-
-  // Função para formatar a duração do filme
-  const formatMovieDuration = (runtime: number) => {
-    const hours = Math.floor(runtime / 60)
-    const minutes = runtime % 60
-    return formatDuration(
-      { hours, minutes },
-      { format: ["hours", "minutes"], locale: ptBR }
     )
   }
 
@@ -95,8 +95,33 @@ export default function MovieId({ params }: MovieIdProps) {
           <div className="flex justify-between mb-2">
             <h1 className="text-xl font-medium">{movie.title || movie.name}</h1>
             <div className="flex items-center gap-5">
-              <ThumbsUp />
-              <ThumbsDown />
+              <button
+                onClick={toggleLikeMovie}
+                disabled={dislikedMovies.some((item) => item.id === movie?.id)}
+              >
+                {likedMovies &&
+                likedMovies.length > 0 &&
+                likedMovies.findIndex((item) => item.id === movie?.id) !==
+                  -1 ? (
+                  <ThumbsUp className="text-yellow-500" />
+                ) : (
+                  <ThumbsUp />
+                )}
+              </button>
+
+              <button
+                onClick={toggleDislikeMovie}
+                disabled={likedMovies.some((item) => item.id === movie?.id)}
+              >
+                {dislikedMovies &&
+                dislikedMovies.length > 0 &&
+                dislikedMovies.findIndex((item) => item.id === movie?.id) !==
+                  -1 ? (
+                  <ThumbsDown className="text-red-500" />
+                ) : (
+                  <ThumbsDown />
+                )}
+              </button>
             </div>
           </div>
           <div className="">
@@ -150,7 +175,7 @@ export default function MovieId({ params }: MovieIdProps) {
       <div className="mx-10">
         <h2 className="my-3 text-xl font-medium">Elenco</h2>
         <div className="overflow-x-auto">
-          <div className="flex space-x-6">
+          <div className="flex space-x-3">
             {cast.map((member) => (
               <div key={member.id} className="text-sm">
                 <div>
@@ -167,7 +192,9 @@ export default function MovieId({ params }: MovieIdProps) {
                 </div>
                 <div>
                   <p>{member.name}</p>
-                  <p className="text-slate-500 dark:text-slate-400">{member.character}</p>
+                  <p className="text-slate-500 dark:text-slate-400">
+                    {member.character}
+                  </p>
                 </div>
               </div>
             ))}

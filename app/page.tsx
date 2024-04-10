@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Movie } from "./interface"
 import { Card } from "@/components/card"
-import { FetchTrending } from "@/lib/fetchTrending"
+import { useFetchTrending } from "@/lib/useFetchTrending"
 import Loading from "./loading"
 import { Pagination } from "@/components/pagination"
 
@@ -21,7 +21,7 @@ export default function Home() {
     totalResults,
     totalPages,
     loading,
-  } = FetchTrending()
+  } = useFetchTrending()
 
   return (
     <main className="max-w-7xl m-auto">
@@ -54,12 +54,9 @@ export default function Home() {
       )}
       {!loading && (
         <>
-          {" "}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center">
             {trendingData.map((movie: Movie) => (
-              <>
-                <Card key={movie.id} movie={movie} />
-              </>
+              <Card key={movie.id} movie={movie} />
             ))}
           </div>
           <Pagination

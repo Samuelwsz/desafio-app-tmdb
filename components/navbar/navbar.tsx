@@ -12,11 +12,11 @@ const links = [
   },
   {
     title: "Curtidos",
-    path: "/likes",
+    path: "/likedMovie",
   },
   {
     title: "Não Curtidos",
-    path: "/notliked",
+    path: "/deslikeMovie",
   },
   {
     title: "Categorias",
