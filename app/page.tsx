@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { Movie } from "./interface"
 import { Card } from "@/components/card"
 import { useFetchTrending } from "@/lib/useFetchTrending"
@@ -25,28 +24,29 @@ export default function Home() {
 
   return (
     <main className="max-w-7xl m-auto">
-      <div className="flex justify-center my-5">
-        <Button
-          className={`mr-5 ${
+      <div className="flex justify-between w-[80%] sm:w-[70%] md:w-[50%] bg-slate-300 dark:bg-slate-700 rounded-full overflow-hidden p-1 m-auto transition ease-in duration-500 gap-2">
+        <button
+          className={`flex-1 rounded-full py-1 px-3 focus:outline-none transition ease-in-out duration-500  ${
             trendingType === "day"
-              ? "font-semibold bg-orange-400"
-              : "font-normal"
+              ? "bg-orange-500 text-white"
+              : "bg-slate-300 dark:bg-slate-600/70  dark:text-slate-300"
           }`}
           onClick={() => handleSwitchTrending("day")}
         >
           Principais tendências do Dia
-        </Button>
-        <Button
-          className={`ml-5 ${
+        </button>
+        <button
+          className={`flex-1 rounded-full py-1 px-3 focus:outline-none transition ease-in-out duration-300 ${
             trendingType === "week"
-              ? "font-semibold bg-orange-400"
-              : "font-normal"
+              ? "bg-orange-500 text-white"
+              : "bg-slate-300  dark:bg-slate-600/70  dark:text-slate-300"
           }`}
           onClick={() => handleSwitchTrending("week")}
         >
           Principais tendências da Semana
-        </Button>
+        </button>
       </div>
+
       {loading && (
         <>
           <Loading />

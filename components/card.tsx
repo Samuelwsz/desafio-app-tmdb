@@ -17,6 +17,7 @@ export function Card({ movie }: { movie: Movie }) {
             }`}
             width={500}
             height={300}
+            priority
             className="sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300"
           />
         ) : (
@@ -29,7 +30,7 @@ export function Card({ movie }: { movie: Movie }) {
           <h1>{movie.title || movie.name}</h1>
           <p className="flex items-center gap-2">
             <Star className="size-5 dark:text-yellow-300" />{" "}
-            {movie.vote_average.toFixed(1)}
+            {movie.vote_average ? movie.vote_average.toFixed(1) : ""}
           </p>
         </div>
         <div className="flex justify-between">
