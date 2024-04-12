@@ -12,7 +12,13 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Tests
+
+```
+npm run test
+```
 
 ## Dependencies
 
@@ -28,7 +34,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Jest
 
-
 ## [Challenge 1](https://github.com/vivadecora/projeto-front-end-vivadecora-nao-fazer-fork) - [Challenge 2](https://github.com/Promobit/front-end-challenge)
 
-### I used both challenges in a project for study purposes 
+#### I used both challenges in a project for study purposes
