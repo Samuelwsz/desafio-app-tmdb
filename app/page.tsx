@@ -1,10 +1,10 @@
 "use client"
 
 import { Movie } from "./interface"
-import { Card } from "@/components/card"
+import { Card } from "@/components/card/card"
 import { useFetchTrending } from "@/lib/useFetchTrending"
 import Loading from "./loading"
-import { Pagination } from "@/components/pagination"
+import { Pagination } from "@/components/pagination/pagination"
 
 export default function Home() {
   const {
@@ -49,7 +49,7 @@ export default function Home() {
 
       {loading && (
         <>
-          <Loading />
+          <Loading  />
         </>
       )}
       {!loading && (

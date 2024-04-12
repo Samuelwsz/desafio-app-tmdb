@@ -36,3 +36,14 @@ export interface Genre {
   id: number
   name: string
 }
+
+export interface PaginationProps {
+  itemsPerPage: number
+  totalResults: number
+  currentPage: number
+  totalPages: number
+  goToFirstPage: () => void
+  goToPreviousPage: () => void
+  goToNextPage: () => void
+  goToLastPage: () => void
+}

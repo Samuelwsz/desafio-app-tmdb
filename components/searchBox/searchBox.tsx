@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
 
 export function SearchBox() {
   const [search, setSearch] = useState<string>("")

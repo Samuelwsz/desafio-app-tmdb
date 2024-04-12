@@ -4,18 +4,8 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react"
-import { IconButton } from "./icon-button"
-
-interface PaginationProps {
-  itemsPerPage: number
-  totalResults: number
-  currentPage: number
-  totalPages: number
-  goToFirstPage: () => void
-  goToPreviousPage: () => void
-  goToNextPage: () => void
-  goToLastPage: () => void
-}
+import { IconButton } from "../icon-button"
+import { PaginationProps } from "@/app/interface"
 
 export function Pagination({
   itemsPerPage,
@@ -41,12 +31,17 @@ export function Pagination({
         <IconButton onClick={goToFirstPage} disabled={currentPage === 1}>
           <ChevronsLeft className="text-orange-500" />
         </IconButton>
-        <IconButton onClick={goToPreviousPage} disabled={currentPage === 1}>
+        <IconButton
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+          data-testid="previous-button"
+        >
           <ChevronLeft className="text-orange-500" />
         </IconButton>
         <IconButton
           onClick={goToNextPage}
           disabled={currentPage === totalPages}
+          data-testid="next-button"
         >
           <ChevronRight className="text-orange-500" />
         </IconButton>

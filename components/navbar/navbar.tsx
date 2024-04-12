@@ -5,7 +5,7 @@ import { NavLink } from "./navlink"
 import Logo from "@/public/tmdblogo.png"
 import Image from "next/image"
 
-const links = [
+export const links = [
   {
     title: "Melhores filmes",
     path: "/toprated",

@@ -1,10 +1,10 @@
 "use client"
 
 import { Movie } from "../interface"
-import { Card } from "@/components/card"
+import { Card } from "@/components/card/card"
 import { Button } from "@/components/ui/button"
 import Loading from "../loading"
-import { Pagination } from "@/components/pagination"
+import { Pagination } from "@/components/pagination/pagination"
 import { useFetchCategorys } from "@/lib/useFetchCategorys"
 
 const categorys = [

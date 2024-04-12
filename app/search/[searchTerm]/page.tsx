@@ -1,6 +1,6 @@
 import { Movie } from "@/app/interface"
 import Loading from "@/app/loading"
-import { Card } from "@/components/card"
+import { Card } from "@/components/card/card"
 import axios from "axios"
 
 interface SearchTermProps {
@@ -18,8 +18,6 @@ export default async function SearchPage({ params }: SearchTermProps) {
 
   const data = await res.data
   const results = data.results
-
-  
 
   return (
     <div>

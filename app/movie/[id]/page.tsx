@@ -93,7 +93,9 @@ export default function MovieId({ params }: MovieIdProps) {
 
         <div className="ml-2">
           <div className="flex justify-between mb-2">
-            <h1 className="text-xl font-medium">{movie.title || movie.name}</h1>
+            <h1 className="text-xl font-medium" data-testid="movie-title">
+              {movie.title || movie.name}
+            </h1>
             <div className="flex items-center gap-5">
               <button
                 onClick={toggleLikeMovie}
